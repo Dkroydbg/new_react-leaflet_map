@@ -1,0 +1,149 @@
+[
+    {
+        "id":1,
+        "Refinery": "IOC,Digboi",
+        "Latitude": 27.39,
+        "Longitude": 95.61,
+        "date": 20230401
+    },
+    {
+        "id":2,
+      "Refinery": "IOC, Guwahati",
+      "Latitude": 26.18,
+      "Longitude": 91.81,
+      "date": 20230401
+    },
+    {
+        "id":3,
+      "Refinery": "IOC, Koyali",
+      "Latitude": 22.37,
+      "Longitude": 73.12,
+      "date": 20230401
+    },
+    {
+        "id":4,
+      "Refinery": "IOC, Barauni",
+      "Latitude": 25.43,
+      "Longitude": 86.05,
+      "date": 20230401
+    },
+    {
+        "id":5,
+      "Refinery": "IOC, Haldia",
+      "Latitude": 22.04,
+      "Longitude": 88.1,
+      "date": 20230401
+    },
+    {
+        "id":6,
+      "Refinery": "IOC, Mathura",
+      "Latitude": 27.38,
+      "Longitude": 77.68,
+      "date": 20230401
+    },
+    {
+        "id":7,
+      "Refinery": "IOC, Panipat",
+      "Latitude": 29.46,
+      "Longitude": 76.88,
+      "date": 20230401
+    },
+    {
+        "id":8,
+      "Refinery": "IOC, Bongaigaon",
+      "Latitude": 26.51,
+      "Longitude": 90.53,
+      "date": 20230401
+    },
+    {
+        "id":9,
+      "Refinery": "IOC, Paradip",
+      "Latitude": 20.24,
+      "Longitude": 86.59,
+      "date": 20230401
+    },
+    {
+        "id":10,
+      "Refinery": "HPC, Mumbai",
+      "Latitude": 19.01,
+      "Longitude": 72.86,
+      "date": 20230401
+    },
+    {
+        "id":11,
+      "Refinery": "HPC, Visakh",
+      "Latitude": 17.69,
+      "Longitude": 83.24,
+      "date": 20230401
+    },
+    {
+        "id":12,
+      "Refinery": "BPC, Mumbai",
+      "Latitude": 19.01,
+      "Longitude": 72.86,
+      "date": 20230401
+    },
+    {
+        "id":13,
+      "Refinery": "BPC, Kochi",
+      "Latitude": 9.97,
+      "Longitude": 76.37,
+      "date": 20230401
+    },
+    {
+        "id":14,
+      "Refinery": "BPC, Bina",
+      "Latitude": 24.25,
+      "Longitude": 78.15,
+      "date": 20230401
+    },
+    {
+        "id":15,
+      "Refinery": "CPCL,Manali",
+      "Latitude": 13.16,
+      "Longitude": 80.27,
+      "date": 20230401
+    },
+    {
+        "id":16,
+      "Refinery": "NRL, Numaligarh",
+      "Latitude": 26.57,
+      "Longitude": 93.78,
+      "date": 20230401
+    },
+    {
+        "id":17,
+      "Refinery": "ONGC, Tatipaka",
+      "Latitude": 16.5,
+      "Longitude": 81.89,
+      "date": 20230401
+    },
+    {
+        "id":18,
+      "Refinery": "MRPL, Mangalore",
+      "Latitude": 12.99,
+      "Longitude": 74.85,
+      "date": 20230401
+    },
+    {
+        "id":19,
+      "Refinery": "HMEL, GGSR",
+      "Latitude": 29.92,
+      "Longitude": 74.95,
+      "date": 20230401
+    },
+    {
+        "id":20,
+      "Refinery": "RIL, Jamnagar",
+      "Latitude": 22.34,
+      "Longitude": 69.86,
+      "date": 20230401
+    },
+    {
+        "id":21,
+      "Refinery": "NEL, Vadinar",
+      "Latitude": 22.34,
+      "Longitude": 69.86,
+      "date": 20230401
+    }
+]
