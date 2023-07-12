@@ -97,9 +97,12 @@ const Map = (props) => {
               
                 <Tooltip direction="center"  permanent opacity={0.6}>
                        <span>{Math.trunc(data.data)}</span>
-                       {/* <Popup>
-                        <p>{Math.trunc(mdata)}</p>
-                       </Popup> */}
+                       <Popup>
+                        <h4><u>CH4 Value</u></h4>
+                        {/* <br/> */}
+                        <p><b>Name</b>: {data.name}</p>
+                        <p><b>CH4</b>: {Math.trunc(data.data)}</p>
+                       </Popup>
               </Tooltip>
               </CircleMarker>
               </div>
