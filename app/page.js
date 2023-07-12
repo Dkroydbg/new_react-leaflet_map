@@ -74,7 +74,7 @@ export default function Home() {
     
     const values=[]
     const ids=[]
-    for(let id=1;id<=9;id++){
+    for(let id=1;id<=11;id++){
       let sum=0
       let denominator=0
       for(let i=0;i<dates.length;i++){
@@ -97,7 +97,7 @@ export default function Home() {
     
   const setrefnames=()=>{
     const allrefineryname=[]
-    for(let i=1;i<=9;i++){
+    for(let i=1;i<=11;i++){
       {RefineryData.map((data)=>{
         if(data.id===i){
           allrefineryname.push([data.Refinery])
@@ -109,7 +109,7 @@ export default function Home() {
 
   const setreflocations=()=>{
     const allrefinerylocation=[]
-    for(let i=1;i<=9;i++){
+    for(let i=1;i<=11;i++){
       {RefineryData.map((data)=>{
         if(data.id===i){
           allrefinerylocation.push([data.Latitude,data.Longitude])
