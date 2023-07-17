@@ -7,7 +7,7 @@ import '../app/globals.css'
 import Controls from "@/components/Controls";
 import respiredata from '../components/respirer.json'
 import RefineryData from '../components/data.json'
-// import dfd from 'danfojs'
+import * as dfd from 'danfojs'
 
 
 export default function Home() {
@@ -199,6 +199,14 @@ export default function Home() {
     Data:allMethaneData,
   }
 
+  const AllRefineryData=[
+    {
+      loc:allRefineryLocation,
+      name:allRefineryName,
+      data:allMethaneData
+    }
+  ]
+
  
   const jsonArray=[];
 
@@ -213,11 +221,11 @@ export default function Home() {
 
 
 
-  // let df = new dfd.DataFrame(AllRefineryData);
+  let df = new dfd.DataFrame(AllRefineryData);
 
-  // const jsonObj = df.toJSON();
+  const jsonObj = df.toJSON();
 
-  // console.log(jsonObj)
+  console.log("the danfojs is",jsonObj)
 
 
 
