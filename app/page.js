@@ -1,5 +1,5 @@
 "use client"
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { use, useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 // import DateRangeComp from "@/components/DateRangeComp";
 import Header from "@/components/Header";
@@ -8,6 +8,7 @@ import Controls from "@/components/Controls";
 import respiredata from '../components/respirer.json'
 import RefineryData from '../components/data.json'
 import * as dfd from 'danfojs'
+import Graphs from "@/components/graphs";
 
 
 export default function Home() {
@@ -25,11 +26,13 @@ export default function Home() {
   const [allRefineryName, setAllRefineryName] = useState([]);
   const [allRefineryLocation, setAllRefineryLocation] = useState([]);
   const [dates, setDates] = useState([]);
-  const [idNo, setIdNo] = useState();
+  const [idNo, setIdNo] = useState([]);
   const [refineryName, setRefineryName] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [idClick,setId]=useState();
+  const [jsonvalue, setEmitterData] = useState({});
+  const [id,setGraphId]=useState();
 
   
   
@@ -144,6 +147,8 @@ export default function Home() {
       console.log(value)
       setMethaneData(value)
       console.log(latitude,longitude)
+
+      
       
       const values=fetchAllMethaneData(dates)
       setAllMethaneData(values)
@@ -152,11 +157,14 @@ export default function Home() {
       
 
       console.log(idClick)
-      console.log(allIdNo)
+      console.log("all id number are : ",allIdNo)
+      console.log("graph id is in pages: ",id);
       console.log(allRefineryName)
       console.log("all refinery locations are",allRefineryLocation)
+      
+      
     
-  }, [methaneData,dates,idNo,refineryName,fetchAllMethaneData,idClick])
+  }, [methaneData,dates,idNo,refineryName,fetchAllMethaneData,idClick,jsonvalue,id])
   
   
 
@@ -172,20 +180,28 @@ export default function Home() {
     
   }
 
-  const handleAllData=(dates,idClick)=>{
-    setDates(dates)
-    console.log(dates)
-    setId(idClick)   
-    console.log(idClick)  
-    for(let i=1;i<=9;i++){
-      setAllIdNo([i])
-    }
-    // setValues();
+  const graphhandle=(id)=>{
+    setGraphId(id);
   }
 
-  
+  const handleAllData=(dates,idClick,jsonvalue)=>{
+    setDates(dates)
+    // console.log("in pages dates are",dates)
+    setId(idClick)   
+    console.log(idClick)  
+    setEmitterData(jsonvalue);
+    // console.log("in pages:",jsonvalue);
+    // const newJsonValue=JSON.parse(jsonvalue)
+    console.log(typeof jsonvalue);
+    console.log("in pages:",jsonvalue);
+    const idarr=[]
+    for(let i=1;i<=12;i++){
+      idarr.push(i);
+    }
+    setAllIdNo(idarr);
+    // console.log(" in pages all id number are : ",allIdNo)
+  }
 
-  
   const Locations=[latitude,longitude]
   const refineryData={
     Name:refineryName,
@@ -197,49 +213,30 @@ export default function Home() {
     Loc:allRefineryLocation,
     "name":allRefineryName,
     Data:allMethaneData,
+    lid:allIdNo
   }
-
-  const AllRefineryData=[
-    {
-      loc:allRefineryLocation,
-      name:allRefineryName,
-      data:allMethaneData
-    }
-  ]
 
  
   const jsonArray=[];
 
   for(let i=0;i<data.Loc.length;i++){
     const obj={
+      
       loc:data.Loc[i],
       name:data.name[i],
-      data:data.Data[i]
+      data:data.Data[i],
+      lid:data.lid[i]
     }
     jsonArray.push(obj)
   }
-
-
-
-  let df = new dfd.DataFrame(AllRefineryData);
-
-  const jsonObj = df.toJSON();
-
-  console.log("the danfojs is",jsonObj)
-
-
-
-
-
-
-
 
   return (
     <main>
       <div id="map">
         <Header />
-        <Controls style={{ zIndex: "1001", position: "relative" }} handleSubmit={handleSubmit} handleAllData={handleAllData} />
-        <MapComp style={{ width: "100%px", height: "500px", margin: "10px" }} refineryData={refineryData} Locations={Locations} idClick={idClick} allRefineryName={allRefineryName} allRefineryLocation={allRefineryLocation} allMethaneData={allMethaneData} jsonArray={jsonArray} />
+        <Controls style={{ zIndex: "1001", position: "relative" }} handleSubmit={handleSubmit} handleAllData={handleAllData} jsonvalue={jsonvalue} />
+        <MapComp style={{ width: "100%", height: "500px", margin: "10px" }} refineryData={refineryData} Locations={Locations} idClick={idClick} allRefineryName={allRefineryName} allRefineryLocation={allRefineryLocation} allMethaneData={allMethaneData} jsonArray={jsonArray} graphhandle={graphhandle} />
+        <center><Graphs style={{ width: "1000px", height: "800px", marginTop:"10px" }} className="graph" jsonvalue={jsonvalue} id={id} /></center>
       </div>
     </main>
   );

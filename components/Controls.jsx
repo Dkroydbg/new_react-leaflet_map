@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Moment from 'moment';
+import Graphs from './graphs';
 
 const Controls = (props) => {
     console.log('Controls', props)
-    const [fromDate, setFromDate] = useState(new Date().setDate(new Date().getDate() - 1));
-    const [toDate, setToDate] = useState(new Date());
+    console.log("graph values",props.jsonvalue)
+    const [fromDate, setFromDate] = useState((new Date("2023-03-31T17:57:28.556094Z")));
+    const [toDate, setToDate] = useState((new Date("2023-04-01T17:57:28.556094Z")));
     const [idNo,setIdNo]=useState();
+    const [emitterData,setEmitterData] = useState({});
     // const [id,setId]=useState();
     // const [dates,setDates]=useState([]);
 
@@ -40,11 +43,35 @@ const Controls = (props) => {
         
     };
 
-    const handleNewClick=(e)=>{
+    const handleNewClick=async(e)=>{
         e.preventDefault();
         // Handle form submission here
         console.log('From Date:', Moment(fromDate).format('YYYY-MM-DD'));
         console.log('To Date:', Moment(toDate).format('YYYY-MM-DD'));
+
+        const dateFrom=Moment(fromDate).format('YYYY-MM-DD');
+        const dateTo=Moment(toDate).format('YYYY-MM-DD');
+
+        const res = await fetch("/translate", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			// body: JSON.stringify({ text }),
+            body: JSON.stringify({
+                dateFrom:dateFrom,
+                dateTo:dateTo
+            }),
+		});
+        const emitData=await res.json();
+        
+        const value = emitData.translatedText.toString().replace(/(?:\\[rn]|[\r\n]+)+/g, "");
+        const newJsonValue=JSON.parse(value)
+
+        // console.log("emitter Data",newJsonValue);
+        
+        // setEmitterData(newJsonValue);
+        // console.log("emitter Data is",emitterData);
 
         const date = new Date(fromDate.getTime());
         while (date <= toDate) {
@@ -53,12 +80,16 @@ const Controls = (props) => {
         }
         const idClick=2
         // console.log(dates);
-        props.handleAllData(dates,idClick);
+        props.handleAllData(dates,idClick,newJsonValue);
         console.log(dates);
         
     }
 
+
+
     return (
+        <div>
+        <center>
         <div style={{ display: 'flex', flexDirection: 'row',...props.style }}>
             <div>
                 <label htmlFor="fromDate">From Date:</label>
@@ -80,14 +111,14 @@ const Controls = (props) => {
                 />
             </div>
             <>
-            <input type="number"  onChange={(e)=>setIdNo(e.target.value)} value={idNo} placeholder='Enter Id of Refinery' />
-            <button onClick={handleClick}>Submit</button>
-            </>
-            <>
-                <p>Want all the Refinery Ch4 values</p>
-                <button onClick={handleNewClick}>Submit</button>
+            <button onClick={handleNewClick}>Submit</button>
             </>
         </div>
+        <div>
+            {/* <Graphs jsonvalue={props.jsonvalue}/> */}
+        </div>
+        </center>
+    </div>
     );
 };
 
