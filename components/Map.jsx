@@ -76,7 +76,7 @@ const Map = (props) => {
                         {/* <br/> */}
                         <p><b>Name</b>: {data.name}</p>
                         <p><b>CH4</b>: {Math.trunc(data.data)}</p>
-                        <button className="btn btn-primary" id={data.lid} onClick={handlegraph}>Graph</button>
+                        <button className="buton2" id={data.lid} onClick={handlegraph}>Graph</button>
                        </Popup>
               </Tooltip>
               </CircleMarker>

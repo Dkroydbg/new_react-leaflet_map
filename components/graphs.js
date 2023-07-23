@@ -96,7 +96,7 @@ const Graphs = (props) => {
   return (
     <div>
         <h1 style={{marginTop:"10px"}}>Super Emitter Graph</h1>
-        <div style={{
+        <div className='graph' style={{
             width:"800px",
             height:"500px",
             margin:"10px"

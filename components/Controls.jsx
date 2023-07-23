@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+// import './Datepicker.scss';
 import Moment from 'moment';
 import Graphs from './graphs';
 
@@ -92,8 +93,9 @@ const Controls = (props) => {
         <center>
         <div style={{ display: 'flex', flexDirection: 'row',...props.style }}>
             <div>
-                <label htmlFor="fromDate">From Date:</label>
+                <label class="inp" htmlFor="fromDate">From Date:</label>
                 <DatePicker
+                    showIcon
                     id="fromDate"
                     selected={fromDate}
                     onChange={handleFromDateChange}
@@ -102,8 +104,9 @@ const Controls = (props) => {
             </div>
 
             <div>
-                <label htmlFor="toDate">To Date:</label>
+                <label class="inp" htmlFor="toDate">To Date:</label>
                 <DatePicker
+                    showIcon
                     id="toDate"
                     selected={toDate}
                     onChange={handleToDateChange}
@@ -111,7 +114,7 @@ const Controls = (props) => {
                 />
             </div>
             <>
-            <button onClick={handleNewClick}>Submit</button>
+            <button type='submit' className='buton' onClick={handleNewClick}>Submit</button>
             </>
         </div>
         <div>

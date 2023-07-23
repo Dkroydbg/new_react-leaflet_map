@@ -110,3 +110,43 @@ a {
   display: flex;
   justify-content: flex-end;
 }
+.buton{
+  margin: auto 10px;
+  padding: 9px 14px;
+  padding:"2px";
+  background-color:#0a0a23;
+  color: #fff;
+  border:none;
+  border-radius:15px;
+  box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+
+}
+.buton:hover {
+  background-color:#002ead;
+  transition: 0.7s;
+}
+
+.buton2{
+  padding: 6px 10px;
+  padding:"2px";
+  background-color:#0a0a23;
+  color: #fff;
+  border:none;
+  border-radius:15px;
+  box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+
+}
+.buton2:hover {
+  background-color:#002ead;
+  transition: 0.7s;
+}
+
+.graph{
+  /* padding: 10px 20px; */
+  border-width:2px;
+  border-style:solid;
+  border-color:rgb(228, 110, 202);
+  border-radius:15px;
+  box-shadow: 0px 0px 2px 2px rgb(228, 110, 202);
+  
+}
