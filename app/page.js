@@ -235,8 +235,18 @@ export default function Home() {
       <div id="map">
         <Header />
         <Controls style={{ zIndex: "1001", position: "relative" }} handleSubmit={handleSubmit} handleAllData={handleAllData} jsonvalue={jsonvalue} />
-        <MapComp style={{ width: "100%", height: "500px", margin: "10px" }} refineryData={refineryData} Locations={Locations} idClick={idClick} allRefineryName={allRefineryName} allRefineryLocation={allRefineryLocation} allMethaneData={allMethaneData} jsonArray={jsonArray} graphhandle={graphhandle} />
-        <center><Graphs style={{ width: "1000px", height: "800px", marginTop:"10px" }} className="graph" jsonvalue={jsonvalue} id={id} /></center>
+        {/* <MapComp style={{ width: "100%", height: "500px", margin: "10px" }} refineryData={refineryData} Locations={Locations} idClick={idClick} allRefineryName={allRefineryName} allRefineryLocation={allRefineryLocation} allMethaneData={allMethaneData} jsonArray={jsonArray} graphhandle={graphhandle} /> */}
+        {/* <center><Graphs style={{ width: "1000px", height: "800px", marginTop:"10px" }} className="graph" jsonvalue={jsonvalue} id={id} /></center> */}
+        <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+          <MapComp style={{ width: "600", height: "500px", margin: "10px" }} refineryData={refineryData} Locations={Locations} idClick={idClick} allRefineryName={allRefineryName} allRefineryLocation={allRefineryLocation} allMethaneData={allMethaneData} jsonArray={jsonArray} graphhandle={graphhandle} />
+          </div>
+          <div className="col-md-6">
+          <center><Graphs className="graph" jsonvalue={jsonvalue} id={id} /></center>
+          </div>
+        </div>
+        </div>
       </div>
     </main>
   );

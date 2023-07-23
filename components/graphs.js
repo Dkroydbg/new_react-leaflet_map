@@ -95,12 +95,10 @@ const Graphs = (props) => {
     }
   return (
     <div>
-        <h1 style={{marginTop:"10px"}}>Super Emitter Graph</h1>
+        {/* <h1 className='heading'>Super Emitter Graph</h1> */}
         <div className='graph' style={{
-            width:"800px",
-            height:"500px",
-            margin:"10px"
-            // marginRight: "10px"
+            width:"650px",
+            height:"400px",
         }}>
             <Line data={data}
             options={options} />
