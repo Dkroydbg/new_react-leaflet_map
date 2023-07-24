@@ -4,12 +4,9 @@ import '../app/globals.css'
 const Header = () => {
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div className="container-fluid">
-                    <center><h2><u>CH4 Value</u></h2></center>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light mb-2">
+                <div className="text-center">
+                    <h2>CH4 Value</h2>
                 </div>
             </nav>
         </div>

@@ -56,7 +56,7 @@ const Map = (props) => {
       center={[25.43, 86.05]}
       zoom={4}
       scrollWheelZoom={false}
-      style={{  height: "500px", width: "650px",borderRadius:"14px",  border: "2px solid black", marginTop:"3px" }}
+      style={{  height: "500px", width: "650px",borderRadius:"14px",  border: "2px solid black", marginTop:"3px", marginLeft:"-100px" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

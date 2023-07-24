@@ -1,8 +1,10 @@
 "use client"
 import React, { use, useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 // import DateRangeComp from "@/components/DateRangeComp";
 import Header from "@/components/Header";
+import 'bootstrap/dist/css/bootstrap.css'
 import '../app/globals.css'
 import Controls from "@/components/Controls";
 import respiredata from '../components/respirer.json'
@@ -233,6 +235,9 @@ export default function Home() {
   return (
     <main>
       <div id="map">
+      <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
         <Header />
         <Controls style={{ zIndex: "1001", position: "relative" }} handleSubmit={handleSubmit} handleAllData={handleAllData} jsonvalue={jsonvalue} />
         {/* <MapComp style={{ width: "100%", height: "500px", margin: "10px" }} refineryData={refineryData} Locations={Locations} idClick={idClick} allRefineryName={allRefineryName} allRefineryLocation={allRefineryLocation} allMethaneData={allMethaneData} jsonArray={jsonArray} graphhandle={graphhandle} /> */}
