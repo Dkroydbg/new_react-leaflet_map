@@ -1,6 +1,7 @@
 import sys
 import numpy as np
 import pandas as pd
+import os
 # import matplotlib.pyplot as plt
 #import plotly.express as px
 # from scipy.stats import zscore
@@ -22,11 +23,12 @@ def emitter(dateFrom, dateTo, data):
 
 
 def value_emitter(datefrom, dateto):
-    obs = pd.read_excel(r'components\India_refinery_locations.xlsx')[:numfiles]
+    obs = pd.read_excel(os.path.join(
+        'components', 'India_refinery_locations.xlsx'))[:numfiles]
     obs['id'] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                  11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
     obs = obs[list(('id', 'Refinery', 'Latitude', 'Longitude'))]
-    readfile = pd.read_csv(r'components\respirer.csv',
+    readfile = pd.read_csv(os.path.join('components', 'respirer.csv'),
                            encoding='utf-8', index_col=False)
     dates = readfile['DateFrom']
     ids = readfile['id']
