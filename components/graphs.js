@@ -120,7 +120,7 @@ const Graphs = (props) => {
             {/* <h1 className='heading'>Super Emitter Graph</h1> */}
             <div className='graph' style={{
                 width: "650px",
-                height: "400px",
+                height: "450px",
             }}>
                  <Plot
 
@@ -131,17 +131,19 @@ data={[
     type: "scatter",
     mode: "markers",
     marker: { color: "red" },
+    name:"Emitter"
   },
   { type: "line", x:dates?dates:null, y: values?values:null,
   line: {
     shape: 'spline',
     smoothing: 1.3,
     color: 'rgb(255, 98, 157)'
-  } 
+  } ,
+  name: "CH4",
  },
   
 ]}
-layout={{ width: "700px", height: "500px", title: "Graph Example" }}
+layout={{ width: 600, height: 400, title: "CH4 Emitter Events" }}
  />
             </div>
         </div>

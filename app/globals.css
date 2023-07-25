@@ -143,8 +143,8 @@ body {
 
 .graph{
   /* padding: 10px 20px; */
-  margin-top: 50px ;
-  margin-right: 100px;
+  margin-top: 30px ;
+  margin-right: -100px;
   border-width:2px;
   border-style:solid;
   border-color:rgb(228, 110, 202);

@@ -50,5 +50,6 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2"
-  }
+  },
+  "homepage":"https://mfe.respirer.in/chasing-methane"
 }
