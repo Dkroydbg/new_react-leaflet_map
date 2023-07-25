@@ -1,7 +1,9 @@
+"use client"
 import { Chart, Bubble, Line } from 'react-chartjs-2';
 import React from 'react'
 import Moment from 'moment';
-import Plot from "react-plotly.js";
+//import Plot from "react-plotly.js";
+import dynamic from 'next/dynamic';
 
 import {
     Chart as ChartJS,
@@ -26,8 +28,9 @@ ChartJS.register(
     LineController,
     BubbleController,
 )
-
-
+const Plot = dynamic(() => import('react-plotly.js'), {
+    ssr: false
+})
 const Graphs = (props) => {
 
     const dates = []
@@ -114,7 +117,7 @@ const Graphs = (props) => {
     //     },
     // }
 
-    
+
     return (
         <div>
             {/* <h1 className='heading'>Super Emitter Graph</h1> */}
@@ -122,35 +125,33 @@ const Graphs = (props) => {
                 width: "650px",
                 height: "450px",
             }}>
-                 <Plot
+                <Plot
 
-data={[
-  {
-    x: dates?dates:null,
-    y: values1?values1:null,
-    type: "scatter",
-    mode: "markers",
-    marker: { color: "red" },
-    name:"Emitter"
-  },
-  { type: "line", x:dates?dates:null, y: values?values:null,
-  line: {
-    shape: 'spline',
-    smoothing: 1.3,
-    color: 'rgb(255, 98, 157)'
-  } ,
-  name: "CH4",
- },
-  
-]}
-layout={{ width: 600, height: 400, title: "CH4 Emitter Events" }}
- />
+                    data={[
+                        {
+                            x: dates ? dates : null,
+                            y: values1 ? values1 : null,
+                            type: "scatter",
+                            mode: "markers",
+                            marker: { color: "red" },
+                            name: "Emitter"
+                        },
+                        {
+                            type: "line", x: dates ? dates : null, y: values ? values : null,
+                            line: {
+                                shape: 'spline',
+                                smoothing: 1.3,
+                                color: 'rgb(255, 98, 157)'
+                            },
+                            name: "CH4",
+                        },
+
+                    ]}
+                    layout={{ width: 600, height: 400, title: "CH4 Emitter Events" }}
+                />
             </div>
         </div>
     )
 }
 
-
-
-
-export default Graphs
+export default Graphs;

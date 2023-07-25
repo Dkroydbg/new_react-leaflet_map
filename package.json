@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy:local": "next build && pm2 startOrRestart ecosystem.config.js --env local",
+    "deploy:dev": "next build && pm2 startOrRestart ecosystem.config.js --env development",
+    "deploy:prod": "next build && pm2 startOrRestart ecosystem.config.js --env production"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -49,7 +52,8 @@
     "child_process": false
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.0.2"
+    "@faker-js/faker": "^8.0.2",
+    "encoding": "^0.1.13"
   },
-  "homepage":"https://mfe.respirer.in/chasing-methane"
+  "homepage": "https://mfe.respirer.in/chasing-methane"
 }
