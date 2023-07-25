@@ -14,7 +14,7 @@ def emitter(dateFrom,dateTo,data):
     higher_filter=pd.to_datetime(dateTo).tz_localize(utc)
     data['Date']=pd.to_datetime(data['Date'])
     final_data=data[(data['Date']>=lower_filter) & (data['Date']<=higher_filter)]
-    final_data=final_data[list(('id','Date','Value','Leak?'))]
+    final_data=final_data[list(('id','Date','Value','Leak'))]
     #final_data.shape
     return final_data
 
@@ -36,7 +36,7 @@ def value_emitter(datefrom,dateto):
     data['5th_percentile_60day_rolling'] = data['Value'].rolling(window=60, min_periods=minperiod).quantile(0.05)
     data['Delta'] = data['Value'] - data['5th_percentile_60day_rolling']    
     # Add a column 'Status' based on the condition (Delta >= 50: Yes, Delta < 50: No)
-    data['Leak?'] = data['Delta'].apply(lambda x: 'Yes' if x >= 65 else 'No')
+    data['Leak'] = data['Delta'].apply(lambda x: 'Yes' if x >= 65 else 'No')
     data['NaN_Count'] = data['Value'].rolling(window=60).count(numeric_only=False)
     value=emitter(datefrom,dateto,data)
     value
