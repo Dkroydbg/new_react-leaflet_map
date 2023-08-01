@@ -129,7 +129,7 @@ const Graphs = (props) => {
 
                     data={[
                         {
-                            x: dates ? dates : null,
+                            x: dates1 ? dates1 : null,
                             y: values1 ? values1 : null,
                             type: "scatter",
                             mode: "markers",
@@ -140,14 +140,33 @@ const Graphs = (props) => {
                             type: "line", x: dates ? dates : null, y: values ? values : null,
                             line: {
                                 shape: 'spline',
-                                smoothing: 1.3,
+                                smoothing: 1.5,
                                 color: 'rgb(255, 98, 157)'
                             },
                             name: "CH4",
                         },
 
                     ]}
-                    layout={{ width: 600, height: 400, title: "CH4 Emitter Events" }}
+                    layout={{ width: 620, height: 400, title: `CH4 Mean Values of ${props.singleName}` }}
+                />
+            </div>
+            <div className='scattergraph' style={{
+                width: "650px",
+                height: "450px",
+            }}>
+            <Plot
+
+                    data={[
+                        {
+                            type: "scatter", x: dates1 ? dates1 : null, y: values1 ? values1 : null,
+                            type: "scatter",
+                            mode: "markers",
+                            marker: { color: "red" },
+                            name: "Emitter"
+                        },
+
+                    ]}
+                    layout={{ width: 600, height: 400, title: `CH4 Emitter Events of  ${props.singleName}` }}
                 />
             </div>
         </div>

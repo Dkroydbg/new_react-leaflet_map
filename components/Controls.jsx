@@ -8,7 +8,7 @@ import Graphs from './Graphs';
 const Controls = (props) => {
     console.log('Controls', props)
     console.log("graph values", props.jsonvalue)
-    const [fromDate, setFromDate] = useState((new Date("2023-03-31T17:57:28.556094Z")));
+    const [fromDate, setFromDate] = useState((new Date("2023-03-25T17:57:28.556094Z")));
     const [toDate, setToDate] = useState((new Date("2023-04-01T17:57:28.556094Z")));
     const [idNo, setIdNo] = useState();
     const [emitterData, setEmitterData] = useState({});
@@ -93,7 +93,7 @@ const Controls = (props) => {
             <center>
                 <div style={{ display: 'flex', flexDirection: 'row', ...props.style }}>
                     <div>
-                        <label class="inp" htmlFor="fromDate">From Date:</label>
+                        <label className="inp" htmlFor="fromDate">From Date:</label>
                         <DatePicker
                             showIcon
                             id="fromDate"
@@ -104,7 +104,7 @@ const Controls = (props) => {
                     </div>
 
                     <div>
-                        <label class="inp" htmlFor="toDate">To Date:</label>
+                        <label className="inp" htmlFor="toDate">To Date:</label>
                         <DatePicker
                             showIcon
                             id="toDate"
