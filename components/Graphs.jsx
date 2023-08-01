@@ -119,57 +119,64 @@ const Graphs = (props) => {
 
 
     return (
-        <div>
-            {/* <h1 className='heading'>Super Emitter Graph</h1> */}
-            <div className='graph' style={{
-                width: "650px",
-                height: "450px",
-            }}>
-                <Plot
 
-                    data={[
-                        {
-                            x: dates1 ? dates1 : null,
-                            y: values1 ? values1 : null,
-                            type: "scatter",
-                            mode: "markers",
-                            marker: { color: "red" },
-                            name: "Emitter"
-                        },
-                        {
-                            type: "line", x: dates ? dates : null, y: values ? values : null,
-                            line: {
-                                shape: 'spline',
-                                smoothing: 1.5,
-                                color: 'rgb(255, 98, 157)'
-                            },
-                            name: "CH4",
-                        },
+        <div className='container' style={{ maxWidth: "100%", textAlign: "center" }}>
+            <div className='row'>
+                <div className='col-md-6 d-flex justify-content-center'>
+                    <div className='graph' style={{
+                        width: "100%",
+                        height: "450px",
+                    }}>
+                        <Plot
 
-                    ]}
-                    layout={{ width: 620, height: 400, title: `CH4 Mean Values of ${props.singleName}` }}
-                />
-            </div>
-            <div className='scattergraph' style={{
-                width: "650px",
-                height: "450px",
-            }}>
-            <Plot
+                            data={[
+                                {
+                                    x: dates1 ? dates1 : null,
+                                    y: values1 ? values1 : null,
+                                    type: "scatter",
+                                    mode: "markers",
+                                    marker: { color: "red" },
+                                    name: "Emitter"
+                                },
+                                {
+                                    type: "line", x: dates ? dates : null, y: values ? values : null,
+                                    line: {
+                                        shape: 'spline',
+                                        smoothing: 1.5,
+                                        color: 'rgb(255, 98, 157)'
+                                    },
+                                    name: "CH4",
+                                },
 
-                    data={[
-                        {
-                            type: "scatter", x: dates1 ? dates1 : null, y: values1 ? values1 : null,
-                            type: "scatter",
-                            mode: "markers",
-                            marker: { color: "red" },
-                            name: "Emitter"
-                        },
+                            ]}
+                            layout={{ width: 700, height: 400, title: `CH4 Mean Values of ${props.singleName}` }} config={{ responsive: true }}
+                        />
+                    </div>
+                </div>
+                <div className='col-md-6 d-flex justify-content-center'>
+                    <div className='scattergraph' style={{
+                        width: "100%",
+                        height: "450px",
+                    }}>
+                        <Plot
 
-                    ]}
-                    layout={{ width: 600, height: 400, title: `CH4 Emitter Events of  ${props.singleName}` }}
-                />
+                            data={[
+                                {
+                                    type: "scatter", x: dates1 ? dates1 : null, y: values1 ? values1 : null,
+                                    type: "scatter",
+                                    mode: "markers",
+                                    marker: { color: "red" },
+                                    name: "Emitter"
+                                },
+
+                            ]}
+                            layout={{ width: 700, height: 400, title: `CH4 Emitter Events of  ${props.singleName}` }} config={{ responsive: true }}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
+
     )
 }
 
