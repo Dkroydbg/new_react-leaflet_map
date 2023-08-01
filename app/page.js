@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import 'bootstrap/dist/css/bootstrap.css'
 import '../app/globals.css'
 import Controls from "@/components/Controls";
-import respiredata from '../components/respirer.json'
+import Respiredata from '../components/respirer.json'
 import RefineryData from '../components/data.json'
 import * as dfd from 'danfojs'
 //import Graphs from "@/components/graphs";
@@ -50,7 +50,7 @@ export default function Home() {
       let sum = 0
       let denominator = 0
       for (let i = 0; i < dates.length; i++) {
-        respiredata.map((data) => {
+        Respiredata.map((data) => {
           if (data.id == id && data.mean != "NaN" && new Date(dates[i]).getDate() === new Date(data.DateFrom).getDate() && new Date(dates[i]).getMonth() === new Date(data.DateFrom).getMonth() && new Date(dates[i]).getYear() === new Date(data.DateFrom).getYear()) {
             sum += data.mean
             denominator++
