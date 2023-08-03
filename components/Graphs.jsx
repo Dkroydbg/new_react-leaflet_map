@@ -5,29 +5,6 @@ import Moment from 'moment';
 //import Plot from "react-plotly.js";
 import dynamic from 'next/dynamic';
 
-import {
-    Chart as ChartJS,
-    LineElement,
-    CategoryScale,  //x-axis
-    LinearScale,  //y-axis
-    Legend,
-    PointElement,
-    Title,
-    Tooltip,
-    LineController,
-    BubbleController,
-} from 'chart.js'
-ChartJS.register(
-    LineElement,
-    CategoryScale,
-    LinearScale,
-    Legend,
-    PointElement,
-    Title,
-    Tooltip,
-    LineController,
-    BubbleController,
-)
 const Plot = dynamic(() => import('react-plotly.js'), {
     ssr: false
 })
@@ -38,6 +15,8 @@ const Graphs = (props) => {
     const dates1 = []
     const yesno = []
     const values1 = []
+    let emitter=0
+    let nonNanValues=0
     const isObjectEmpty = (objectName) => {
         for (let prop in objectName) {
             if (objectName.hasOwnProperty(prop)) {
@@ -54,68 +33,35 @@ const Graphs = (props) => {
             }
         })
     }
+
+    if (isObjectEmpty(props.jsonvalue) == false) {
+        props.jsonvalue.map((key, index) => {
+            if (key.id == props.id&&key.Value!= null) {
+                nonNanValues++;
+            }
+        })
+    }
+
+
+
+    //to get the dates on which the emitter has been occured and values are the values on which the emitter has been occured and emitter is the total number of times the emitter has been occured.
     if (isObjectEmpty(props.jsonvalue) == false) {
         props.jsonvalue.map((key, index) => {
             if (key.id == props.id && key.Leak == 'Yes') {
                 dates1.push(Moment(key.Date).format('YYYY-MM-DD'));
                 values1.push(key.Value)
                 yesno.push(key.Leak)
+                emitter++
             }
         })
     }
 
+    console.log("the emitter for the id ",props.id, " and total number of emitter events that has ocured is ",emitter)
+
+
 
     console.log("props in graph is: ", props.id)
     console.log(values1)
-
-
-    // const data = {
-    //     labels: dates ? dates : null,
-    //     datasets: [
-    //         // {
-    //         //     // type:'scatter',
-    //         //     label:'Yes or No',
-    //         //     data:[{
-    //         //         x:dates?dates:null,
-    //         //         y:values1?values1:null,
-    //         //     }],
-    //         //     backgroundColor: 'black',
-    //         //     borderColor: [
-    //         //         'rgba(255, 99, 132, 1)',
-    //         //     ]
-    //         // },
-
-    //         {
-    //             type:'line',
-    //             label: 'CH4 Value',
-    //             data: values ? values : null,
-    //             backgroundColor: [
-    //                 'rgba(255, 99, 132,0.5)',
-    //             ],
-    //             borderColor: [
-    //                 'rgba(255, 99, 132, 1)',
-    //             ],
-    //             // pointBorderColor:'aqua',
-    //             pointStyle: 'circle',
-    //             pointRadius: 6,
-    //             pointHoverRadius: 10,
-    //             tension: 0.4
-    //         },
-    //     ]
-    // }
-    // const options = {
-    //     // type:'bubble',
-    //     responsive: true,
-    //     plugins: {
-    //         legend: {
-    //             position: 'top',
-    //         },
-    //         title: {
-    //             display: true,
-    //             text: 'Chart.js Line Chart',
-    //         },
-    //     },
-    // }
 
 
     return (
@@ -125,7 +71,7 @@ const Graphs = (props) => {
                 <div className='col-md-6 d-flex justify-content-center'>
                     <div className='graph' style={{
                         width: "100%",
-                        height: "450px",
+                        height: "auto",
                     }}>
                         <Plot
 
@@ -151,12 +97,22 @@ const Graphs = (props) => {
                             ]}
                             layout={{ width: 700, height: 400, title: `CH4 Mean Values of ${props.singleName}` }} config={{ responsive: true }}
                         />
+                        <div className='row'>
+                            <div className="d-flex justify-content-center">
+                                <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title">Data Availibility: {nonNanValues} Days</h5>
+                                    {/* <p className="card-text"> :<b></b></p> */}
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className='col-md-6 d-flex justify-content-center'>
                     <div className='scattergraph' style={{
                         width: "100%",
-                        height: "450px",
+                        height: "auto",
                     }}>
                         <Plot
 
@@ -172,10 +128,20 @@ const Graphs = (props) => {
                             ]}
                             layout={{ width: 700, height: 400, title: `CH4 Emitter Events of  ${props.singleName}` }} config={{ responsive: true }}
                         />
+                        <div className='row'>
+                            <div className=" d-flex justify-content-center">
+                                <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title text center">Emitter Events: {emitter}</h5>
+                                    {/* <p className="card-text"><FormatListNumberedIcon/>: <b></b></p> */}
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
 
     )
 }

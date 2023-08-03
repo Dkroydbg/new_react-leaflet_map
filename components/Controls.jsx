@@ -23,26 +23,9 @@ const Controls = (props) => {
         setToDate(date);
     };
     const dates = []
-    const handleClick = (e) => {
-        e.preventDefault();
-        // Handle form submission here
-        console.log('From Date:', Moment(fromDate).format('YYYY-MM-DD'));
-        console.log('To Date:', Moment(toDate).format('YYYY-MM-DD'));
-
-        const date = new Date(fromDate.getTime());
-        while (date <= toDate) {
-            dates.push(Moment((new Date(date))).format('YYYY-MM-DD'));
-            date.setDate(date.getDate() + 1);
-        }
-        // console.log(dates);
-        const idClick = 1
-        props.handleSubmit(dates, idNo, idClick);
-        console.log(dates);
-        console.log(idNo);
 
 
-
-    };
+    // };
 
     const handleNewClick = async (e) => {
         e.preventDefault();
@@ -81,7 +64,10 @@ const Controls = (props) => {
         }
         const idClick = 2
         // console.log(dates);
-        props.handleAllData(dates, idClick, newJsonValue);
+        props.setEmitterData(newJsonValue)
+        props.setId(idClick)
+        props.setDates(dates)
+        props.handleAllData();
         console.log(dates);
 
     }
@@ -114,11 +100,8 @@ const Controls = (props) => {
                         />
                     </div>
                     <>
-                        <button type='submit' className='buton' onClick={handleNewClick}>Submit</button>
+                        <button type='submit' className='buton' onClick={(e)=>handleNewClick(e)}>Submit</button>
                     </>
-                </div>
-                <div>
-                    {/* <Graphs jsonvalue={props.jsonvalue}/> */}
                 </div>
             </center>
         </div>

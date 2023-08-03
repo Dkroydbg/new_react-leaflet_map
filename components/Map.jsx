@@ -12,6 +12,7 @@ import Moment from 'moment';
 const Map = (props) => {
 
   const handlegraph = (e) => {
+    e.preventDefault();
     const id = e.target.id;
     console.log("graph id is: ", id);
     props.graphhandle(id);
@@ -23,7 +24,7 @@ const Map = (props) => {
 
     <MapContainer
       center={[25.43, 86.05]}
-      zoom={4}
+      zoom={5}
       scrollWheelZoom={false}
       style={{ borderRadius: "14px", border: "2px solid black", marginTop: "3px", ...props.style }}
     >
@@ -46,7 +47,7 @@ const Map = (props) => {
                     <p><b>Name</b>: {data.name}</p>
                     <p><b>CH4</b>: {Math.trunc(data.data)}</p>
                     <p><b>ID</b>: {Math.trunc(data.lid)}</p>
-                    <button className="buton2" id={data.lid} onClick={handlegraph}>Graph</button>
+                    <button className="buton2" id={data.lid} onClick={(e)=>handlegraph(e)}>Graph</button>
                   </Popup>
                 </Tooltip>
               </CircleMarker>

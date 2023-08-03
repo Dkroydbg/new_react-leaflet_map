@@ -26,26 +26,21 @@ export default function Home() {
     ssr: false
   })
 
-  const [methaneData, setMethaneData] = useState();
   const [allMethaneData, setAllMethaneData] = useState([]);
   const [allIdNo, setAllIdNo] = useState([]);
-  const [allRefineryName, setAllRefineryName] = useState([]);
-  const [allRefineryLocation, setAllRefineryLocation] = useState([]);
-  const [dates, setDates] = useState([]);
-  // const [idNo, setIdNo] = useState([]);
-  // const [refineryName, setRefineryName] = useState("");
-  // const [latitude, setLatitude] = useState("");
-  // const [longitude, setLongitude] = useState("");
+  const [dates, setDates] = useState(['2023-03-25', '2023-03-26', '2023-03-27', '2023-03-28', '2023-03-29', '2023-03-30', '2023-03-31', '2023-04-01']);
   const [idClick, setId] = useState();
   const [jsonvalue, setEmitterData] = useState({});
-  const [id, setGraphId] = useState();
+  const [graphId, setGraphId] = useState();
+  
+  
+  
+  
 
-
+  const values = []
+  const ids = []
   //fetch all data of all refinery locations with ch4 values
   const fetchAllMethaneData = useCallback((dates) => {
-
-    const values = []
-    const ids = []
     for (let id = 1; id <= 21; id++) {
       let sum = 0
       let denominator = 0
@@ -65,12 +60,12 @@ export default function Home() {
   }, [dates])
 
 
-
-
-  useEffect(() => {
-    const [values, ids] = fetchAllMethaneData(dates)
-    setAllMethaneData(values)
-    setAllIdNo(ids)
+  useEffect( () => {
+      console.log("inside the useffect ")
+      const [values, ids] = fetchAllMethaneData(dates)
+      setAllMethaneData(values)
+      setAllIdNo(ids)
+    
     // console.log("all methane data are ", allMethaneData)
     // console.log(idClick)
     // console.log("all id number are : ", allIdNo)
@@ -84,20 +79,22 @@ export default function Home() {
     setGraphId(id);
   }
 
-  const handleAllData = (dates, idClick, jsonvalue) => {
-    setDates(dates)
-    console.log("in pages dates are", dates)
-    setId(idClick)
-    console.log(idClick)
-    setEmitterData(jsonvalue);
-    console.log(typeof jsonvalue);
-    console.log("in pages:", jsonvalue);
+  const handleAllData = async (dates, idClick, jsonvalue) => {
+    // e.preventDefault();
+    // setDates(dates)
+    // console.log("in pages dates are", dates)
+    // setId(idClick)
+    // console.log(idClick)
+    // setEmitterData(jsonvalue);
+    // console.log(typeof jsonvalue);
+    // console.log("in pages:", jsonvalue);
+    const [values, ids] = fetchAllMethaneData(dates)
+    setAllMethaneData(values)
+    setAllIdNo(ids)
   }
-
-
+  
   const refloction = []
   const refNames = []
-
   RefineryData.map((refData) => {
     allIdNo.map((alId) => {
       if (refData.id === alId) {
@@ -109,7 +106,7 @@ export default function Home() {
 
   let singleName = "";
   RefineryData.map((refData) => {
-    if (refData.id == id) {
+    if (refData.id == graphId) {
       singleName = refData.Refinery;
     }
   })
@@ -122,11 +119,7 @@ export default function Home() {
     lid: allIdNo
   }
 
-
-
-
-
-  const jsonArray = [];
+  const jsonArray = []
 
   for (let i = 0; i < data.Loc.length; i++) {
     const obj = {
@@ -148,15 +141,15 @@ export default function Home() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <Header />
-        <Controls style={{ zIndex: "1001", position: "relative" }} handleAllData={handleAllData} />
-        {/* <MapComp style={{ width: "100%", height: "500px", margin: "10px" }} refineryData={refineryData} Locations={Locations} idClick={idClick} allRefineryName={allRefineryName} allRefineryLocation={allRefineryLocation} allMethaneData={allMethaneData} jsonArray={jsonArray} graphhandle={graphhandle} /> */}
-        {/* <center><Graphs style={{ width: "1000px", height: "800px", marginTop:"10px" }} className="graph" jsonvalue={jsonvalue} id={id} /></center> */}
+        <Controls style={{ zIndex: "1001", position: "relative" }} handleAllData={handleAllData} setDates={setDates} setId={setId} setEmitterData={setEmitterData} />
         <div className="container" style={{ maxWidth: "100%" }}>
           <MapComp style={{ width: "100%", height: "500px" }} idClick={idClick} allMethaneData={allMethaneData} jsonArray={jsonArray} graphhandle={graphhandle} />
           <div className="row">
+            {graphId? (
             <div>
-              <Graphs className="graph" jsonvalue={jsonvalue} id={id} singleName={singleName} />
+              <Graphs className="graph" jsonvalue={jsonvalue} id={graphId} singleName={singleName} />
             </div>
+            ):(<></>)}
           </div>
         </div>
       </div>
