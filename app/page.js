@@ -79,7 +79,7 @@ export default function Home() {
     setGraphId(id);
   }
 
-  const handleAllData = async (dates, idClick, jsonvalue) => {
+  const handleAllData = async () => {
     // e.preventDefault();
     // setDates(dates)
     // console.log("in pages dates are", dates)
