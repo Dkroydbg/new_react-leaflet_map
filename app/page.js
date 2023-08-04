@@ -80,14 +80,6 @@ export default function Home() {
   }
 
   const handleAllData = async () => {
-    // e.preventDefault();
-    // setDates(dates)
-    // console.log("in pages dates are", dates)
-    // setId(idClick)
-    // console.log(idClick)
-    // setEmitterData(jsonvalue);
-    // console.log(typeof jsonvalue);
-    // console.log("in pages:", jsonvalue);
     const [values, ids] = fetchAllMethaneData(dates)
     setAllMethaneData(values)
     setAllIdNo(ids)
@@ -141,7 +133,7 @@ export default function Home() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <Header />
-        <Controls style={{ zIndex: "1001", position: "relative" }} handleAllData={handleAllData} setDates={setDates} setId={setId} setEmitterData={setEmitterData} />
+        <Controls style={{ zIndex: "1001", position: "relative" }} handleAllData={handleAllData} setDates={setDates} setId={setId} setEmitterData={setEmitterData} setGraphId={setGraphId} />
         <div className="container" style={{ maxWidth: "100%" }}>
           <MapComp style={{ width: "100%", height: "500px" }} idClick={idClick} allMethaneData={allMethaneData} jsonArray={jsonArray} graphhandle={graphhandle} />
           <div className="row">

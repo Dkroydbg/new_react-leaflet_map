@@ -7,21 +7,21 @@
         "date": 20230401
     },
     {
-        "id":2,
+      "id":2,
       "Refinery": "IOC, Guwahati",
       "Latitude": 26.18,
       "Longitude": 91.81,
       "date": 20230401
     },
     {
-        "id":3,
+      "id":3,
       "Refinery": "IOC, Koyali",
       "Latitude": 22.37,
       "Longitude": 73.12,
       "date": 20230401
     },
     {
-        "id":4,
+      "id":4,
       "Refinery": "IOC, Barauni",
       "Latitude": 25.43,
       "Longitude": 86.05,
@@ -98,7 +98,7 @@
       "date": 20230401
     },
     {
-        "id":15,
+      "id":15,
       "Refinery": "CPCL,Manali",
       "Latitude": 13.16,
       "Longitude": 80.27,

@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 // import './Datepicker.scss';
 import Moment from 'moment';
 import Graphs from './Graphs';
+import RefineryData from './data.json'
 
 const Controls = (props) => {
     console.log('Controls', props)
@@ -12,6 +13,7 @@ const Controls = (props) => {
     const [toDate, setToDate] = useState((new Date("2023-04-01T17:57:28.556094Z")));
     const [idNo, setIdNo] = useState();
     const [emitterData, setEmitterData] = useState({});
+    const [refName, setRefName] = useState("");
     // const [id,setId]=useState();
     // const [dates,setDates]=useState([]);
 
@@ -72,6 +74,13 @@ const Controls = (props) => {
 
     }
 
+    function handleChange(e) {
+        setRefName(e.target.value);
+        console.log("recieved header name " , e.target.value.match(/\d+/));
+        // console.log("header id is: ", id);
+        props.setGraphId(e.target.value.match(/\d+/))
+       }
+
 
 
     return (
@@ -102,6 +111,17 @@ const Controls = (props) => {
                     <>
                         <button type='submit' className='buton' onClick={(e)=>handleNewClick(e)}>Submit</button>
                     </>
+                    <div>
+                    <label>
+                    Select A Refinery:
+                    <select  onChange={handleChange}>
+                    <option>Select a Region</option>
+                    {RefineryData.map((data) => (
+                        <option >{data.id}: {data.Refinery}</option>
+                    ))}
+                    </select>
+                    </label>
+                    </div>
                 </div>
             </center>
         </div>
