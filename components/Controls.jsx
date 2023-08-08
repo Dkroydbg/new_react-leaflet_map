@@ -5,14 +5,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Moment from 'moment';
 import Graphs from './Graphs';
 import RefineryData from './data.json'
+import { useEffect } from 'react';
 
 const Controls = (props) => {
     console.log('Controls', props)
     console.log("graph values", props.jsonvalue)
-    const [fromDate, setFromDate] = useState((new Date("2023-03-25T17:57:28.556094Z")));
-    const [toDate, setToDate] = useState((new Date("2023-04-01T17:57:28.556094Z")));
-    const [idNo, setIdNo] = useState();
-    const [emitterData, setEmitterData] = useState({});
+    const [fromDate, setFromDate] = useState((new Date("2023-03-25T17:57:28.556094Z")) );
+    const [toDate, setToDate] = useState((new Date("2023-04-02T17:57:28.556094Z")));
+    // const [idNo, setIdNo] = useState();
+    // const [emitterData, setEmitterData] = useState({});
     const [refName, setRefName] = useState("");
     // const [id,setId]=useState();
     // const [dates,setDates]=useState([]);
@@ -29,15 +30,7 @@ const Controls = (props) => {
 
     // };
 
-    const handleNewClick = async (e) => {
-        e.preventDefault();
-        // Handle form submission here
-        console.log('From Date:', Moment(fromDate).format('YYYY-MM-DD'));
-        console.log('To Date:', Moment(toDate).format('YYYY-MM-DD'));
-
-        const dateFrom = Moment(fromDate).format('YYYY-MM-DD');
-        const dateTo = Moment(toDate).format('YYYY-MM-DD');
-
+    const getEmitterData=async (dateFrom,dateTo) =>{
         const res = await fetch("chasing-methane/translate", {
             method: "POST",
             headers: {
@@ -45,8 +38,8 @@ const Controls = (props) => {
             },
             // body: JSON.stringify({ text }),
             body: JSON.stringify({
-                dateFrom: dateFrom,
-                dateTo: dateTo
+                dateFrom: dateFrom?dateFrom:props.dates[0],
+                dateTo: dateTo?dateTo:props.dates[dates.length - 1],
             }),
         });
         const emitData = await res.json();
@@ -54,10 +47,29 @@ const Controls = (props) => {
         const value = emitData.translatedText.toString().replace(/(?:\\[rn]|[\r\n]+)+/g, "");
         const newJsonValue = JSON.parse(value)
 
-        // console.log("emitter Data",newJsonValue);
+        props.setEmitterData(newJsonValue)
+    }
 
-        // setEmitterData(newJsonValue);
-        // console.log("emitter Data is",emitterData);
+
+    useEffect(()=>{
+        const newFrom=Moment(fromDate).format('YYYY-MM-DD')
+        const newTo=Moment(toDate).format('YYYY-MM-DD')
+        getEmitterData(newFrom,newTo)
+        console.log("date from props in controls are ",props.dates[0], "and ",props.dates[props.dates.length - 1])
+        console.log("props dates in controls are ",props.dates)
+    },[])
+
+    const handleNewClick = async (e) => {
+        e.preventDefault();
+        // Handle form submission here
+        console.log('From Date:', Moment(fromDate).format('YYYY-MM-DD'));
+        console.log('To Date:', Moment(toDate).format('YYYY-MM-DD'));
+        
+
+        const dateFrom = Moment(fromDate).format('YYYY-MM-DD');
+        const dateTo = Moment(toDate).format('YYYY-MM-DD');
+
+        getEmitterData(dateFrom, dateTo)
 
         const date = new Date(fromDate.getTime());
         while (date <= toDate) {
@@ -65,8 +77,9 @@ const Controls = (props) => {
             date.setDate(date.getDate() + 1);
         }
         const idClick = 2
+        console.log("date from props in controls are ",props.dates[0], "and ",props.dates[props.dates.length - 1])
         // console.log(dates);
-        props.setEmitterData(newJsonValue)
+        // props.setEmitterData(newJsonValue)
         props.setId(idClick)
         props.setDates(dates)
         props.handleAllData();
@@ -79,6 +92,7 @@ const Controls = (props) => {
         console.log("recieved header name " , e.target.value.match(/\d+/));
         // console.log("header id is: ", id);
         props.setGraphId(e.target.value.match(/\d+/))
+        // props.openPopUpGraph(e.target.value.match(/\d+/))
        }
 
 

@@ -32,6 +32,7 @@
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "leaflet-geosearch": "^3.8.0",
+    "leaflet-labeled-circle": "^1.0.3",
     "moment": "^2.29.4",
     "mui": "^0.0.1",
     "next": "13.4.7",
@@ -49,7 +50,8 @@
     "react-select": "^5.7.4",
     "redux": "^4.2.1",
     "rsuite": "^5.37.3",
-    "sass": "^1.63.6"
+    "sass": "^1.63.6",
+    "styled-components": "^6.0.7"
   },
   "browser": {
     "tls": false,

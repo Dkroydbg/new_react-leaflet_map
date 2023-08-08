@@ -102,7 +102,6 @@ const Graphs = (props) => {
                                 <div className="card">
                                 <div className="card-body">
                                     <h5 className="card-title">Data Availibility: {nonNanValues} Days</h5>
-                                    {/* <p className="card-text"> :<b></b></p> */}
                                 </div>
                                 </div>
                             </div>
@@ -132,8 +131,7 @@ const Graphs = (props) => {
                             <div className=" d-flex justify-content-center">
                                 <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title text center">Emitter Events: {emitter}</h5>
-                                    {/* <p className="card-text"><FormatListNumberedIcon/>: <b></b></p> */}
+                                    <h5 className="card-title">Emitter Events: {emitter}</h5>
                                 </div>
                                 </div>
                             </div>

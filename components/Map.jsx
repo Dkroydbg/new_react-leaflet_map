@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
 import Moment from 'moment';
+import {useRef, useEffect} from 'react';
 // import RefineryData from '../components/data.json'
 
 
@@ -11,18 +12,44 @@ import Moment from 'moment';
 
 const Map = (props) => {
 
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
+
+  const onClickShowPopUp = (e) => {
+    const map = mapRef.current;
+    if (!map) {
+      return;
+    }
+
+    // map.flyTo( 13);
+
+    const marker = markerRef.current;
+    if (marker) {
+      marker.openPopup();
+    }
+    console.log("marker is clicked: ", marker);
+  };
+
   const handlegraph = (e) => {
     e.preventDefault();
-    const id = e.target.id;
-    console.log("graph id is: ", id);
-    props.graphhandle(id);
+    const gid = e.target.gid;
+    console.log("graph id is: ", gid);
+    props.graphhandle(gid);
   }
 
-  console.log("in idclick 2 ", props.AllRefineryData)
+    
+    
+    
+    
+
+  // console.log("in idclick 2 ", props.AllRefineryData)
   return (
 
-
+    <div>
     <MapContainer
+      whenReady={(map) => {
+        mapRef.current = map;
+      }}
       center={[25.43, 86.05]}
       zoom={5}
       scrollWheelZoom={false}
@@ -35,11 +62,16 @@ const Map = (props) => {
       {props.jsonArray.map((data, id) => (
         <div key={id}>
           <Circle center={[data.loc[0], data.loc[1]]} color="green" fillColor="green" radius={300} opacity={0.5} />
-          {props.allMethaneData.map((mdata, id2) => (
+          
             <div>
-              <CircleMarker center={[data.loc[0], data.loc[1]]} color="green" radius={10} opacity={0.7}>
+              
+                <CircleMarker center={[data.loc[0], data.loc[1]]} color="green" radius={20} opacity={0.9} ref={props.markerRef} eventHandlers={{
+                click: (e) => {
+                  onClickShowPopUp()
+                },
+              }}>
 
-                <Tooltip direction="center" permanent opacity={0.7} color="blue">
+                <Tooltip direction="center"  permanent opacity={1} >
                   <span>{Math.trunc(data.data)}</span>
                   <Popup gid={id + 1} >
                     <h4><u>CH4 Value</u></h4>
@@ -47,15 +79,16 @@ const Map = (props) => {
                     <p><b>Name</b>: {data.name}</p>
                     <p><b>CH4</b>: {Math.trunc(data.data)}</p>
                     <p><b>ID</b>: {Math.trunc(data.lid)}</p>
-                    <button className="buton2" id={data.lid} onClick={(e)=>handlegraph(e)}>Graph</button>
+                    {/* <button className="buton2" gid={data.lid} onClick={(e)=>handlegraph(e)}>Graph</button> */}
                   </Popup>
                 </Tooltip>
-              </CircleMarker>
+              </CircleMarker> 
             </div>
-          ))}
+          
         </div>
       ))}
     </MapContainer>
+    </div>
 
   );
   // }

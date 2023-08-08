@@ -191,3 +191,17 @@ body {
   }
 
 }
+
+/* #map {
+  width: 100%;
+  height: 100%;
+}
+
+.leaflet-tooltip-pane .text {
+  color: red; 
+  font-weight: bold;
+  background: transparent;
+  border:0;
+  box-shadow: none;
+  font-size:2em;
+} */

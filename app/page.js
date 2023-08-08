@@ -9,8 +9,10 @@ import '../app/globals.css'
 import Controls from "@/components/Controls";
 import Respiredata from '../components/respirer.json'
 import RefineryData from '../components/data.json'
+// import FaqPage from "@/app/faqPage";
 import * as dfd from 'danfojs'
 //import Graphs from "@/components/graphs";
+import NewMap from "@/components/newMap";
 
 
 export default function Home() {
@@ -26,12 +28,19 @@ export default function Home() {
     ssr: false
   })
 
+  // const Header = dynamic(() => import('../components/Header'), {
+  //   ssr: false
+  // })
+
   const [allMethaneData, setAllMethaneData] = useState([]);
   const [allIdNo, setAllIdNo] = useState([]);
-  const [dates, setDates] = useState(['2023-03-25', '2023-03-26', '2023-03-27', '2023-03-28', '2023-03-29', '2023-03-30', '2023-03-31', '2023-04-01']);
+  const [dates, setDates] = useState(['2023-03-25', '2023-03-26', '2023-03-27', '2023-03-28', '2023-03-29', '2023-03-30', '2023-03-31', '2023-04-01','2023-04-02']);
   const [idClick, setId] = useState();
   const [jsonvalue, setEmitterData] = useState({});
   const [graphId, setGraphId] = useState();
+
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
   
   
   
@@ -73,6 +82,24 @@ export default function Home() {
     // console.log(allRefineryName)
     // console.log("all refinery locations are", allRefineryLocation)
   }, [fetchAllMethaneData])
+
+  const openPopUpGraph=(locId)=>{
+    jsonArray.map((data)=>{
+      if(data.id==locId){
+        const map = mapRef.current;
+        if (!map) {
+        return;
+    }
+
+    map.flyTo([data.loc[0], data.loc[1]], 13);
+
+    const marker = markerRef.current;
+    if (marker) {
+      marker.openPopup();
+    }
+    }
+    })
+  }
 
 
   const graphhandle = (id) => {
@@ -133,9 +160,9 @@ export default function Home() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <Header />
-        <Controls style={{ zIndex: "1001", position: "relative" }} handleAllData={handleAllData} setDates={setDates} setId={setId} setEmitterData={setEmitterData} setGraphId={setGraphId} />
+        <Controls style={{ zIndex: "1001", position: "relative" }} handleAllData={handleAllData} setDates={setDates} setId={setId} setEmitterData={setEmitterData} setGraphId={setGraphId} dates={dates} openPopUpGraph={openPopUpGraph}/>
         <div className="container" style={{ maxWidth: "100%" }}>
-          <MapComp style={{ width: "100%", height: "500px" }} idClick={idClick} allMethaneData={allMethaneData} jsonArray={jsonArray} graphhandle={graphhandle} />
+          <MapComp style={{ width: "100%", height: "500px" }} idClick={idClick} allMethaneData={allMethaneData} jsonArray={jsonArray} graphhandle={graphhandle} id={graphId} mapRef={mapRef} markerRef={markerRef} />
           <div className="row">
             {graphId? (
             <div>
@@ -143,6 +170,8 @@ export default function Home() {
             </div>
             ):(<></>)}
           </div>
+          {/* <FaqPage /> */}
+          <NewMap />
         </div>
       </div>
     </main>
