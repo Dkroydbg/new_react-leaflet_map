@@ -30,6 +30,10 @@ const Map = (props) => {
     console.log("marker is clicked: ", marker);
   };
 
+  if(props.id){
+    onClickShowPopUp();
+  }
+
   const handlegraph = (e) => {
     e.preventDefault();
     const gid = e.target.gid;
